@@ -1,0 +1,25 @@
+{{ include('partials/header.twig') }}
+
+<h1>Leaderboard</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>High score</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% set i = 1 %}
+    {% for _user in users %}
+      <tr>
+        <td>{{i}}</td>
+        <td><img width="50" class="img-circle" alt="Profile picture" src="{{_user.picture}}"> {{_user.first_name}} {{_user.last_name}}</td>
+        <td>{{_user.high_score}}</td>
+      </tr>
+      {% set i = i + 1 %}
+    {% endfor %}
+  </tbody>
+</table>
+
+{{ include('partials/footer.twig') }}

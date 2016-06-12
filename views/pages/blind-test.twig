@@ -1,0 +1,80 @@
+{{ include('partials/header.twig') }}
+
+{% if blind_test == "intro" %}
+<div class="jumbotron">
+  <h1>Hello {{user.first_name}} !</h1>
+  <p>
+    Do you know the iTunes top songs ? Challenge your friends and become the ♔ of Blind Test !<br>
+    Answer faster to get more points.
+  </p>
+  <p>
+    <a class="btn btn-primary btn-lg" href="?start" role="button">Start now !</a>
+  </p>
+</div>
+{% endif %}
+
+{% if blind_test == "start" %}
+<div id="blind-test">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>What is this song ?</h2>
+    </div>
+    <div class="col-md-6 text-right">
+      <h2><div class="remaining_div"></div> more</h2>
+    </div>
+  </div>
+  <audio autoplay>
+    <source src="" id="source" type="audio/mp4">
+    Please update your browser.
+  </audio>
+  <div id="answers">
+    <div class="row">
+      <div class="col-md-6 top-buffer">
+        <button type="button" id="0" class="btn btn-default btn-lg btn-block">...</button>
+      </div>
+      <div class="col-md-6 top-buffer">
+        <button type="button" id="1" class="btn btn-default btn-lg btn-block">...</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 top-buffer">
+        <button type="button" id="2" class="btn btn-default btn-lg btn-block">...</button>
+      </div>
+      <div class="col-md-6 top-buffer">
+        <button type="button" id="3" class="btn btn-default btn-lg btn-block">...</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% if blind_test == "end" %}
+<div class="jumbotron text-center">
+  <h1>Your score is {{stats.score.total_score}} points</h1>
+  {% if stats.score.total_score > stats.score.high_score %}
+    <h2>🎉 Congratulations, it's your new high score ! 🎉</h2>
+  {% endif %}
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Song</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% set i = 1 %}
+    {% for _stats in stats.answers %}
+      <tr {% if _stats.answer_number == _stats.user_answer %}class="success"{% else %}class="danger"{% endif %}>
+        <td>{{i}}</td>
+        <td>{{_stats.song_title}}</td>
+        <td>{{_stats.score}}</td>
+      </tr>
+      {% set i = i + 1 %}
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+{{ include('partials/footer.twig') }}
