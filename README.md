@@ -8,4 +8,5 @@ Using [Silex micro-framework](http://silex.sensiolabs.org/).
 
 # Installation
 1. Do a `composer install`
-2. Run the website on the /web/ folder
+2. Change project folder in the /web/.htaccess file
+3. Run the website on the /web/ folder
