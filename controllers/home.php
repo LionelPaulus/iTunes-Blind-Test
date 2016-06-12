@@ -85,5 +85,5 @@
     }
   } else {
     // Redirection link
-    $loginUrl = $helper->getLoginUrl("http://localhost:8888".$app['url_generator']->generate('home'), $permissions);
+    $loginUrl = $helper->getLoginUrl("http://".$_SERVER['HTTP_HOST'].$app['url_generator']->generate('home'), $permissions);
   }
