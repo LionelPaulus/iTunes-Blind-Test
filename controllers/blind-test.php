@@ -1,4 +1,9 @@
 <?php
+  // Create last_update.txt if does not exist
+  if(!file_exists('last_update.txt')){
+    file_put_contents('last_update.txt', '');
+  }
+
   // Update songs
   if(time() - file_get_contents('last_update.txt') > 86400){
     $iTunesRSSModel->update();
