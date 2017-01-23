@@ -4,10 +4,10 @@
   }
 
   $fb = new Facebook\Facebook([
-    'app_id' => '1706121249668764',
-    'app_secret' => '405b37617054bf1117d16a05556d765f',
-    'default_graph_version' => 'v2.4',
-    ]);
+    'app_id' => '****',
+    'app_secret' => '****',
+    'default_graph_version' => 'v2.6',
+  ]);
   $helper = $fb->getRedirectLoginHelper();
   $permissions = ['email']; // Optional
 
@@ -69,6 +69,8 @@
 
     if (empty($result)) {
       $usersModel->add($profile);
+    }else{
+      $usersModel->update($result->id, $profile);
     }
 
     // Sessions
@@ -82,6 +84,7 @@
     if (isset($user)) {
       // return $app->redirect($app['url_generator']->generate('blind-test')); DOESN'T WORK
       header('Location: '.$app['url_generator']->generate('blind-test'));
+      die();
     }
   } else {
     // Redirection link

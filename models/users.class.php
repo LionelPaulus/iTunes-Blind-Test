@@ -38,6 +38,19 @@ class UsersModel
 
     $prepare->execute();
   }
+
+  public function update($id, $profile)
+  {
+    $prepare = $this->db->prepare('UPDATE users SET first_name = :first_name, last_name = :last_name, email = :email, picture = :picture WHERE id = :id');
+    $prepare->bindValue('id', $id);
+    $prepare->bindValue('first_name', $profile['first_name']);
+    $prepare->bindValue('last_name', $profile['last_name']);
+    $prepare->bindValue('email', $profile['email']);
+    $prepare->bindValue('picture', $profile['picture']);
+
+    $prepare->execute();
+  }
+
   public function leaderboard(){
     $query = $this->db->query('
       SELECT
